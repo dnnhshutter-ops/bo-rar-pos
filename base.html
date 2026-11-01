@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bo Rar POS</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body>{% if session.get('user_id') %}<header><div class="brand">🛒 Bo Rar <span>POS</span></div><a href="{{ url_for('logout') }}">ထွက်ရန်</a></header>
+<nav><a href="/">ပင်မစာမျက်နှာ</a><a href="/sales">အရောင်း</a><a href="/purchases">အဝယ်</a><a href="/products">ကုန်ပစ္စည်း</a><a href="/debts">အကြွေး</a><a href="/expenses">အသုံးစရိတ်</a><a href="/reports">အစီရင်ခံစာ</a>{% if session.get("role")=="admin" %}<a href="/settings">ဆက်တင်</a>{% endif %}</nav>{% endif %}
+<main>{% with messages=get_flashed_messages() %}{% if messages %}{% for m in messages %}<div class="alert">{{m}}</div>{% endfor %}{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
+<footer>Bo Rar POS · မြန်မာကျပ်ငွေ (MMK)</footer></body></html>

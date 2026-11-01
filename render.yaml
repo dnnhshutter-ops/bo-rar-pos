@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bo-rar-pos
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 1 --threads 4 --timeout 120 app:app
+    disk:
+      name: bo-rar-pos-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_PATH
+        value: /var/data/pos.db
+      - key: COOKIE_SECURE
+        value: "1"
